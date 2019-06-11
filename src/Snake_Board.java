@@ -40,7 +40,10 @@ public class Snake_Board extends Board {
                 ui(g);
             }
         } else if (State == STATE.GAME_OVER) {
-            gameOver(g);
+            gameOver.message(g);
+            gameOver.lastScore(g);
+            gameOver.bestScore(g);
+            gameOver.menu(g);
         }
 
     }
@@ -91,15 +94,16 @@ public class Snake_Board extends Board {
         g.drawString(msg, 160 , 20);
     }
 
-    private void gameOver(Graphics g) {
+    public static void resetGame() {
 
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics metr = getFontMetrics(small);
-
-        g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        rightDirection = true;
+        upDirection = false;
+        downDirection = false;
+        leftDirection = false;
+        player.setScore(0);
+        snake = new Snake();
+        active = locateApple();
+        State = STATE.GAME;
     }
 
 }
