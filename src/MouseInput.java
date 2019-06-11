@@ -36,6 +36,23 @@ public class MouseInput implements MouseListener {
 
         }
 
+        if (Board.State == Board.STATE.GAME_OVER) {
+            if (mx > 30 && mx < 130) {
+                if (my > 160 && my < 210) {
+                    Snake_Board.resetGame();
+                }
+            }
+            if (mx > 150 && mx < 250) {
+                if (my > 160 && my < 210) {
+                    System.exit(1);
+                }
+            }
+            if (mx > 270 && mx < 370) {
+                if (my > 160 && my < 210) {
+                    Board.player.setName(JOptionPane.showInputDialog(null, "Nombre del jugador"));
+                }
+            }
+        }
     }
 
     @Override

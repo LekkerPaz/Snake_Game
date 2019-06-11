@@ -10,16 +10,17 @@ public class Board extends JPanel implements ActionListener {
 
     public final int B_WIDTH = 400;
     public final int B_HEIGHT = 400;
-    protected final int DOT_SIZE = 10;
-    protected final int RAND_POS = 29;
+    public static final int DOT_SIZE = 10;
+    public static final int RAND_POS = 29;
     protected final int DELAY = 100;
 
-    protected boolean leftDirection = false;
-    protected boolean rightDirection = true;
-    protected boolean upDirection = false;
-    protected boolean downDirection = false;
+    public static boolean leftDirection = false;
+    public static boolean rightDirection = true;
+    public static boolean upDirection = false;
+    public static boolean downDirection = false;
 
     protected Menu menu = new Menu();
+    protected GameOver gameOver = new GameOver();
     public static STATE State = STATE.MENU;
 
     protected Timer timer;
@@ -28,8 +29,8 @@ public class Board extends JPanel implements ActionListener {
     protected Image goldApple;
     protected Image head;
 
-    protected Snake snake = new Snake();
-    protected Apple active = locateApple();
+    public static Snake snake = new Snake();
+    public static Apple active = locateApple();
     protected Apple last = active;
     protected Apple golden;
     public static Player player = new Player();
@@ -82,7 +83,7 @@ public class Board extends JPanel implements ActionListener {
 
 
 
-    private Apple locateApple() {
+    public static Apple locateApple() {
         int x = 0;
         int y = 0;
         boolean same = false;
@@ -212,6 +213,9 @@ public class Board extends JPanel implements ActionListener {
             if (golden != null && !golden.isEaten()) {
                 golden.setEaten(true);
             }
+            if (player.getScore() > player.getBestScore()) {
+                player.setBestScore(player.getScore());
+            }
             State = STATE.GAME_OVER;
         }
     }
@@ -286,9 +290,6 @@ public class Board extends JPanel implements ActionListener {
                     upDirection = false;
                     downDirection = false;
                     leftDirection = false;
-                    if (player.getScore() > player.getBestScore()) {
-                        player.setBestScore(player.getScore());
-                    }
                     player.setScore(0);
                     snake = new Snake();
                     active = locateApple();
