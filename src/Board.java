@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
     protected boolean downDirection = false;
 
     protected Menu menu = new Menu();
-    protected STATE State = STATE.MENU;
+    public static STATE State = STATE.MENU;
 
     protected Timer timer;
     protected Image ball;
@@ -32,9 +32,9 @@ public class Board extends JPanel implements ActionListener {
     protected Apple active = locateApple();
     protected Apple last = active;
     protected Apple golden;
-    protected Player player = new Player();
+    public static Player player = new Player();
 
-    protected enum STATE{
+    public enum STATE{
         MENU,
         GAME,
         GAME_OVER
@@ -54,6 +54,7 @@ public class Board extends JPanel implements ActionListener {
     private void initBoard() {
 
         addKeyListener(new TAdapter());
+        addMouseListener(new MouseInput());
         setBackground(Color.black);
         setFocusable(true);
 
